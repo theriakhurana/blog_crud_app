@@ -1,22 +1,30 @@
 const express = require("express");
 const router = express.Router();
-const Blog = require("../models/blog.model");
 const {
   getBlogs,
-  getBlog,
+  renderCreateForm,
   createBlog,
+  renderEditForm,
   updateBlog,
   deleteBlog,
 } = require("../controllers/blog.controller");
 
-router.get("/", getBlogs);
+// View all blogs
+router.get("/", getBlogs); // → Renders blog-list.hbs
 
-router.get("/:id", getBlog);
+// Render create form
+router.get("/create", renderCreateForm);
 
-router.post("/", createBlog);
+// Handle blog creation
+router.post("/create", createBlog);
 
-router.put("/:id", updateBlog);
+// Render edit form
+router.get("/edit/:id", renderEditForm);
 
-router.delete("/:id", deleteBlog);
+// Handle update
+router.post("/update/:id", updateBlog);
+
+// Handle deletion
+router.post("/delete/:id", deleteBlog);
 
 module.exports = router;
